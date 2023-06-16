@@ -1,7 +1,7 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import BlueNavbar from "./BlueNavbar";
 import Home from "./Home";
+import NavBar from "./NavBar"
 import Pets from "./Pets";
 
 
@@ -11,9 +11,9 @@ function App() {
     return(
         <div id="body">
             <div>
-                <BlueNavbar/>
+                <NavBar/>
             </div>
-            <div>
+            <div id="main">
                 <Switch>
                     <Route exact path="/">
                         <Home/>
