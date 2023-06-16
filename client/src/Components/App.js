@@ -1,10 +1,31 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Route, Switch} from "react-router-dom";
+import BlueNavbar from "./BlueNavbar";
+import Home from "./Home";
+import Pets from "./Pets";
 
 
 function App() {
 
-    return(<h1>Hello</h1>)
+
+    return(
+        <div id="body">
+            <div>
+                <BlueNavbar/>
+            </div>
+            <div>
+                <Switch>
+                    <Route exact path="/">
+                        <Home/>
+                    </Route>
+                    <Route exact path ="/Pets">
+                        <Pets/>
+                    </Route>
+                </Switch>
+            </div>
+
+        </div>
+    )
     
 }
 
