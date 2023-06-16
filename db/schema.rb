@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2023_06_16_172503) do
     t.string "sex"
     t.string "lost_or_found"
     t.string "phone_number"
+    t.string "image"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

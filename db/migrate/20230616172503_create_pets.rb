@@ -7,6 +7,7 @@ class CreatePets < ActiveRecord::Migration[6.1]
       t.string :sex
       t.string :lost_or_found
       t.string :phone_number
+      t.string :image
       t.integer :user_id
 
       t.timestamps
