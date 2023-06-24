@@ -2,6 +2,12 @@ body {
     background-image: url("https://cdn.wallpapersafari.com/70/24/imroKe.jpg");
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.login {
+    margin: 50px
 }
 
 #main {

@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     def destroy
         if session.include? :user_id
             session.delete :user_id
-            head :no content
+            head :no_content
         else
             render json: {errors: ["not logged in"]}, status: :unauthorized 
         end 
