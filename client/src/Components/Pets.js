@@ -1,10 +1,18 @@
 import React from "react";
+import PetCard from "./PetCard";
 
 
+function Pets({pets}) {
 
-function Pets() {
+    const petList = pets.map((pet) => <PetCard key={pet.id} pet={pet}/>)
+
     return(
-        <h1>Pets</h1>
+        <div>
+            <h1>Pets</h1>
+            <div id="pet-disp">
+                {petList}
+            </div>
+        </div>
     )
 }
 

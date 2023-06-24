@@ -10,7 +10,7 @@ function App() {
     const [pets, setPets] = useState([])
 
     useEffect(() => {
-        fetch()
+        fetch("http://localhost:3000/pets")
         .then(res => res.json())
         .then(data => {
             setPets(data)

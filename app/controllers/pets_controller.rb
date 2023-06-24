@@ -1,8 +1,7 @@
 class PetsController < ApplicationController
 
-    def index
-        pets = Pet.all 
-        render json: pets
+    def index 
+        render json: Pet.all, status: :ok
     end
 
 end
