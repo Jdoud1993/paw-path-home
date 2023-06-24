@@ -1,10 +1,13 @@
 import React from "react";
+import Login from "./Login"
 
 
 
 function Home() {
     return(
-        <h1>Hello</h1>
+        <div>
+            <Login/>
+        </div>
     )
 }
 
