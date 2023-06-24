@@ -7,8 +7,9 @@ function Pets({pets}) {
     const petList = pets.map((pet) => <PetCard key={pet.id} pet={pet}/>)
 
     return(
-        <div>
-            <h1>Pets</h1>
+        <div class="pet-view">
+            <h1 class="pet-title">Please See Below for Our Lost and Found Pets</h1>
+            <p class="pet-title">If you find the pet you are looking for below, please click on the pets image for more information.</p>
             <div id="pet-disp">
                 {petList}
             </div>

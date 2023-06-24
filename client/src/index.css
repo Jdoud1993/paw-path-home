@@ -1,3 +1,26 @@
 #main {
-    margin-top: 50px;
+    margin-top: 100px;
 }
+
+/* pets */
+.pet {
+    margin: 50px;
+}
+
+.pet-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.pet-title {
+    text-align: center;
+}
+
+#pet-disp {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-content: space-around;
+    margin: 50px;
+}
+
