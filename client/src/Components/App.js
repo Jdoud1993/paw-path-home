@@ -32,12 +32,12 @@ function App() {
     return(
         <div id="body">
             <div>
-                <NavBar/>
+                <NavBar onLogin={setUser} user={user}/>
             </div>
             <div id="main">
                 <Switch>
                     <Route exact path="/">
-                        <Home/>
+                        <Home user={user}/>
                     </Route>
                     <Route exact path ="/Pets">
                         <Pets pets= {pets}/>

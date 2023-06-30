@@ -3,7 +3,7 @@ import React from "react";
 
 
 
-function Home() {
+function Home({user}) {
     return (
         <div className="welcome">
             <h1>Welcome to Paw Path Home</h1>

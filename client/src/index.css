@@ -14,6 +14,11 @@ body {
     margin-top: 100px;
 }
 
+.username{
+    color: white;
+    margin-right: 10px;
+}
+
 /* home */
 
 .welcome {

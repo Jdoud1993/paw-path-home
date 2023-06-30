@@ -1,14 +1,3 @@
-
-User.create(
-    username: "jdoud1993",
-    password_digest: "Steelers3"
-)
-
-User.create(
-    username: "kdoud1993",
-    password_digest: "Everlynn2021"
-)
-
 Pet.create(
     name: "unknown",
     species: "Dog",
@@ -71,3 +60,4 @@ Comment.create(
     pet_id: 2 
 )
 
+puts "✅ Done seeding!"
