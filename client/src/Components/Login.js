@@ -14,7 +14,7 @@ function Login({onLogin}) {
     
     if (button === 1) {
       setIsLoading(true);
-      fetch("http://localhost:3000/login", {
+      fetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
