@@ -18,7 +18,7 @@ function App() {
                 r.json().then(user => setUser(user))
             }
         })
-    })
+    }, [])
 
     useEffect(() => {
         fetch("/pets")
