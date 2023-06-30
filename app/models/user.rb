@@ -5,7 +5,7 @@ class User < ApplicationRecord
     validates :username, presence: true, uniqueness: true
 
     has_many :comments
-    has_many :pets
+    has_many :posted_pets, :class_name => "Pet", :foreign_key => "user_id"
     has_many :pets, through: :comments
 
 end

@@ -30,7 +30,7 @@ function Login({onLogin}) {
       });}
     else {
       setIsLoading(true);
-      fetch("http://localhost:3000/signup", {
+      fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
