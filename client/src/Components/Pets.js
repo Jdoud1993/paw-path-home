@@ -1,8 +1,18 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import PetCard from "./PetCard";
 
 
-function Pets({pets}) {
+function Pets() {
+
+    const [pets, setPets] = useState([])
+
+    useEffect(() => {
+        fetch("/pets")
+        .then(res => res.json())
+        .then(data => {
+            setPets(data)
+        })
+    }, [])
 
     const petList = pets.map((pet) => <PetCard key={pet.id} pet={pet}/>)
 

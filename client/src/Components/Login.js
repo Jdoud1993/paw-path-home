@@ -72,9 +72,9 @@ function Login({onLogin}) {
           {isLoading ? "Loading..." : "Signup"}
         </Button>
       </Form>
-      <h2 style={{color:"red"}}>
+      <h5 style={{color:"red"}}>
         {errors}
-      </h2>
+      </h5>
     </div>
   );
 }

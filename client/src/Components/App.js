@@ -9,7 +9,7 @@ import Pets from "./Pets";
 function App() {
 
     const [user, setUser] = useState(null)
-    const [pets, setPets] = useState([])
+    
 
     useEffect(()=>{
         fetch("/authorize")
@@ -20,13 +20,7 @@ function App() {
         })
     }, [])
 
-    useEffect(() => {
-        fetch("/pets")
-        .then(res => res.json())
-        .then(data => {
-            setPets(data)
-        })
-    }, [])
+
 
     if (!user) return <Login onLogin={setUser} />
 
@@ -38,7 +32,7 @@ function App() {
             <div id="main">
                 <Switch>
                     <Route exact path="/">
-                        <Home user={user}/>
+                        <Home/>
                     </Route>
                     <Route exact path ="/Pets">
                         <Pets pets={pets}/>
