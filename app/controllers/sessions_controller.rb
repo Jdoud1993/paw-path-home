@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
     def create
         user = User.find_by(username: params[:username])
     
@@ -17,7 +16,7 @@ class SessionsController < ApplicationController
             head :no_content
         else
             render json: {errors: ["not logged in"]}, status: :unauthorized 
-        end 
+        end
     end
 
 end
