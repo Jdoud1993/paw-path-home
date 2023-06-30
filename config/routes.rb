@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :pets, only: [:index]
+  resources :pets, only: [:index, :show]
   resources :users
 
   post "/signup", to: "users#create"

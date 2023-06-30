@@ -1,4 +1,6 @@
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom'
 
 function PetCard({pet}) {
   return (
@@ -10,6 +12,7 @@ function PetCard({pet}) {
                   <Card.Title>Species: {pet.species}</Card.Title>
                   <Card.Title>Breed: {pet.breed}</Card.Title>
                   <Card.Title>Sex: {pet.sex}</Card.Title>
+                  <Button as={Link} to={`/Pets/${pet.id}`}>See More Details</Button>
               </Card.Body>
           </Card>
   );

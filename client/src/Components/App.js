@@ -4,6 +4,7 @@ import Login from "./Login"
 import Home from "./Home";
 import NavBar from "./NavBar"
 import Pets from "./Pets";
+import PetDetail from "./PetDetail";
 
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
                     </Route>
                     <Route exact path ="/Pets">
                         <Pets />
+                    </Route>
+                    <Route exact path="/Pets/:id">
+                        <PetDetail/>
                     </Route>
                 </Switch>
             </div>
