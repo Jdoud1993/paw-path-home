@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
-import Comments from "./Comments"
+import Comments from "./Comments";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 function PetDetail() {
 
@@ -19,6 +20,7 @@ function PetDetail() {
 
     if (!pet) return <h2>Loading...</h2>
     console.log(pet)
+    const commentList = pet.comments.map((comment) => <Comments key={comment.id} comment={comment}/>)
     return (
         <>
             <Card border="primary">
@@ -47,6 +49,9 @@ function PetDetail() {
                     <Card.Text>
                         Comments:
                     </Card.Text>
+                    <ListGroup>
+                        {commentList}
+                    </ListGroup>
                 </Card.Body>
             </Card>
         </>

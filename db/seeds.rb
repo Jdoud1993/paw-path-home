@@ -57,7 +57,7 @@ Comment.create(
 Comment.create(
     body: "This sweet kitty was found on Elm Street and Rancho Vista Boulevard.",
     user_id: 2,
-    pet_id: 2 
+    pet_id: 3 
 )
 
 puts "✅ Done seeding!"

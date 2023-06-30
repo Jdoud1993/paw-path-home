@@ -1,8 +1,11 @@
 import React from "react";
+import ListGroup from 'react-bootstrap/ListGroup';
 
-function Comments() {
+function Comments({comment}) {
     return(
-        <h1>Hello</h1>
+        <ListGroup.Item variant="primary">
+            <h4></h4>
+        </ListGroup.Item>
     )
 }
 
