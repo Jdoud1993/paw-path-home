@@ -35,7 +35,7 @@ function App() {
                         <Home/>
                     </Route>
                     <Route exact path ="/Pets">
-                        <Pets pets={pets}/>
+                        <Pets />
                     </Route>
                 </Switch>
             </div>
