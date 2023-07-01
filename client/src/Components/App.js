@@ -39,7 +39,7 @@ function App() {
                         <Pets />
                     </Route>
                     <Route exact path="/Pets/:id">
-                        <PetDetail/>
+                        <PetDetail user={user}/>
                     </Route>
                 </Switch>
             </div>

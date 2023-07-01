@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Comments from "./Comments";
 import ListGroup from 'react-bootstrap/ListGroup';
+import CommentForm from './CommentForm'
 
-function PetDetail() {
+function PetDetail({user}) {
 
     const [pet, setPet] = useState(null);
-
+    const [comments, setComments] = useState([])
     const {id} = useParams()
 
     useEffect(() => {
@@ -15,12 +16,17 @@ function PetDetail() {
         .then((res) => res.json())
         .then((data) => {
             setPet(data)
+            setComments(data.comments)
         })
     }, [id])
 
+    function handleAddComment(newComment) {
+        console.log(newComment)
+        // setComments([...comments, newComment])
+    }
+
     if (!pet) return <h2>Loading...</h2>
-    console.log(pet)
-    const commentList = pet.comments.map((comment) => <Comments key={comment.id} comment={comment}/>)
+    const commentList = comments.map((comment) => <Comments key={comment.id} comment={comment}/>)
     return (
         <>
             <Card border="primary">
@@ -43,10 +49,14 @@ function PetDetail() {
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <br></br>
+            <Card border="primary" style={{marginBottom: "25px", marginTop: "25px"}}>
+                <Card.Body>
+                    <CommentForm pet={pet} user={user} onAddComment={handleAddComment}/>
+                </Card.Body>
+            </Card>
             <Card border="primary" style={{marginBottom: "50px"}}>
                 <Card.Body>
-                    <Card.Text>
+                    <Card.Text className="non-urgent">
                         Comments:
                     </Card.Text>
                     <ListGroup>

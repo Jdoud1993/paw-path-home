@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   resources :pets, only: [:index, :show]
   resources :users
+  resource :comments, only: [:create]
 
   post "/signup", to: "users#create"
 

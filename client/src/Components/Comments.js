@@ -3,8 +3,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 function Comments({comment}) {
     return(
-        <ListGroup.Item variant="primary">
-            <h4></h4>
+        <ListGroup.Item className="comment" variant="primary">
+            <h4>{comment.user.username}:</h4>
+            <h5>{comment.body}</h5>
         </ListGroup.Item>
     )
 }
