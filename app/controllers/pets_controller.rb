@@ -7,7 +7,7 @@ class PetsController < ApplicationController
     def show
         pet = Pet.find_by(id: params[:id])
         if pet
-            render json: pet, serializer: PetDetailSerializer
+            render json: pet, include: ['comments', 'comments.user']
         else
             render json: {error: "Pet not found"}, status: :not_found 
         end 
