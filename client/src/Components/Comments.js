@@ -63,7 +63,7 @@ function Comments({comment, onUpdateComment, onDeleteComment}) {
             <h5 className="comment-group">
                 {comment.body}
                 <div className="button-group">
-                <Button variant="primary" size="sm" style={{marginBottom: "5px"}} onClick={()=> setIsUpdate(true)}>Update Comment</Button>
+                <Button variant="primary" size="sm" style={{marginBottom: "5px"}} onClick={()=> {setIsUpdate(true); setErrors([])}}>Update Comment</Button>
                 <Button variant="danger" size="sm" onClick={handleDelete}>Delete Comment</Button>
                 </div>
             </h5>

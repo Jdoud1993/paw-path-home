@@ -1,13 +1,14 @@
-import React, {useState} from "react"
+import React, {useState, useContext} from "react"
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {userContext} from "./App"
 
-function PetCard({pet, onDeletePet, user, onUpdatePet}) {
-
+function PetCard({pet, onDeletePet, onUpdatePet}) {
+  const user = useContext(userContext)
   const [errors, setErrors] = useState([])
   const [isUpdate, setIsUpdate] = useState(false)
   const [formData, setFormData] = useState({

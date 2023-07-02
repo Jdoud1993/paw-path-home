@@ -5,7 +5,7 @@ import Comments from "./Comments";
 import ListGroup from 'react-bootstrap/ListGroup';
 import CommentForm from './CommentForm'
 
-function PetDetail({user}) {
+function PetDetail() {
 
     const [pet, setPet] = useState(null);
     const [comments, setComments] = useState([])
@@ -62,7 +62,7 @@ function PetDetail({user}) {
             </Card>
             <Card border="primary" style={{marginBottom: "25px", marginTop: "25px"}}>
                 <Card.Body>
-                    <CommentForm pet={pet} user={user} onAddComment={handleAddComment}/>
+                    <CommentForm pet={pet}  onAddComment={handleAddComment}/>
                 </Card.Body>
             </Card>
             <Card border="primary" style={{marginBottom: "50px"}}>

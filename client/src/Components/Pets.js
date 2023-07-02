@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import {userContext} from "./App";
 import PetCard from "./PetCard";
 
 
-function Pets({user}) {
+function Pets() {
 
+    const user = useContext(userContext)
     const [pets, setPets] = useState([])
 
     useEffect(() => {

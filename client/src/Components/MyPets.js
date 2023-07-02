@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import PetCard from "./PetCard"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {userContext} from "./App"
 
 
-function MyPets({user}) {
-    
+function MyPets() {
+    const user = useContext(userContext)
     const [myPets, setMyPets] = useState([])
     const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
@@ -83,7 +84,7 @@ function MyPets({user}) {
         })
     }
 
-    const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet} user={user} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet}/>)
+    const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet}/>)
     
     return(
         <div>

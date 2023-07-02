@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import {userContext} from "./App"
 
-function CommentForm({pet, user, onAddComment}) {
+function CommentForm({pet, onAddComment}) {
+
+    const user = useContext(userContext) 
 
     const [addComment, setAddComment] = useState(false)
     const [formData, setFormData] = useState({

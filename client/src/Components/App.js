@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, createContext} from "react";
 import {Route, Switch} from "react-router-dom";
 import Login from "./Login"
 import Home from "./Home";
@@ -7,9 +7,12 @@ import Pets from "./Pets";
 import PetDetail from "./PetDetail";
 import MyPets from "./MyPets"
 
+export const userContext = createContext(null)
 
 function App() {
 
+    
+    
     const [user, setUser] = useState(null)
     
 
@@ -22,33 +25,35 @@ function App() {
         })
     }, [])
 
-
+   
 
     if (!user) return <Login onLogin={setUser} />
-
+    
     return(
-        <div id="body">
-            <div>
-                <NavBar onLogin={setUser} user={user}/>
-            </div>
-            <div id="main">
-                <Switch>
-                    <Route exact path="/">
-                        <Home/>
-                    </Route>
-                    <Route exact path ="/Pets">
-                        <Pets user={user}/>
-                    </Route>
-                    <Route exact path="/Pets/:id">
-                        <PetDetail user={user}/>
-                    </Route>
-                    <Route exacty path ="/MyPets">
-                        <MyPets user={user}/>
-                    </Route>
-                </Switch>
-            </div>
+        <userContext.Provider value={user}>
+            <div id="body">
+                <div>
+                        <NavBar onLogin={setUser}/>
+                </div>
+                <div id="main">
+                    <Switch>
+                        <Route exact path="/">
+                            <Home/>
+                        </Route>
+                        <Route exact path ="/Pets">
+                            <Pets/>
+                        </Route>
+                        <Route exact path="/Pets/:id">
+                            <PetDetail/>
+                        </Route>
+                        <Route exacty path ="/MyPets">
+                            <MyPets />
+                        </Route>
+                    </Switch>
+                </div>
 
-        </div>
+            </div>
+        </userContext.Provider>
     )
     
 }
