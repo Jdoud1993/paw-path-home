@@ -9,13 +9,14 @@ import Col from 'react-bootstrap/Col';
 function MyPets({user}) {
     
     const [myPets, setMyPets] = useState([])
+    const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
         name:"",
         species:"",
         breed:"",
         phone_number:"",
         sex:"Unknown",
-        lost_or_found:"",
+        lost_or_found:"Lost",
         image:"",
         user_id:`${user.id}`
 
@@ -39,12 +40,48 @@ function MyPets({user}) {
         });
     }
 
-    const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet}/>)
+    function handleDeletePet(deletedPet) {
+        const newPets = myPets.filter((pet) => pet.id !== deletedPet.id)
+        setMyPets(newPets)
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        fetch("/pets", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData)
+        })
+        .then((res) => {
+            if(res.ok) {
+                res.json().then((data) => {
+                    setMyPets([...myPets, data])
+                    setFormData({
+                        name:"",
+                        species:"",
+                        breed:"",
+                        phone_number:"",
+                        sex:"Unknown",
+                        lost_or_found:"Lost",
+                        image:"",
+                        user_id:`${user.id}`
+                
+                    })
+                })
+            } else {
+                res.json().then((err) => setErrors(err.errors))
+            }
+        })
+    }
+
+    const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet} user={user} onDeletePet={handleDeletePet}/>)
     
     return(
         <div className="pet-view">
             <h1>Post a Lost or Found Pet</h1>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Row className="mb-3">
                     <Form.Group as={Col}>
                         <Form.Label>Pet Name</Form.Label>
@@ -64,7 +101,7 @@ function MyPets({user}) {
 
                     <Form.Group as={Col}>
                         <Form.Label>Contact Number</Form.Label>
-                        <Form.Control name="phone_number" type="password" placeholder="Example: (888) 888-8888" value={formData.phone_number} onChange={handleChange} />
+                        <Form.Control name="phone_number" placeholder="Example: (888) 888-8888" value={formData.phone_number} onChange={handleChange} />
                     </Form.Group>
                 </Row>
 
@@ -72,27 +109,30 @@ function MyPets({user}) {
                     <Form.Group as={Col}>
                         <Form.Label>Sex</Form.Label>
                         <Form.Select name="sex" value={formData.sex} onChange={handleChange} >
-                            <option>Unknown</option>
-                            <option>Male</option>
-                            <option>Female</option>
+                            <option value="Unknown">Unknown</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Lost or Found</Form.Label>
-                        <Form.Select name="lost_or_found" defaultValue="Lost" value={formData.lost_or_found} onChange={handleChange} >
-                            <option>Lost</option>
-                            <option>Found</option>
+                        <Form.Select name="lost_or_found" value={formData.lost_or_found} onChange={handleChange} >
+                            <option value="Lost">Lost</option>
+                            <option value="Found">Found</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>
                 <Form.Group>
                     <Form.Label>Image URL</Form.Label>
-                    <Form.Control type="text" placeholder="Image URL" value={formData.image} onChange={handleChange} />
+                    <Form.Control type="text" placeholder="Image URL" name="image" value={formData.image} onChange={handleChange} />
                 </Form.Group>
                 <br></br>
-                <Button variant="primary" type="submit">
-                    Post Pet
-                </Button>
+                <Row>
+                    <Button variant="primary" type="submit">
+                        Post Pet
+                    </Button>
+                    <h5 style={{color: "red"}}>{errors}</h5>
+                </Row>
             </Form>
             <h1 className="pet-title">My Posted Pets</h1>
             <p className="pet-title">If a pet has been reunited with its owner please delete your post.</p>

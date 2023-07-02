@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import PetCard from "./PetCard";
 
 
-function Pets() {
+function Pets({user}) {
 
     const [pets, setPets] = useState([])
 
@@ -14,7 +14,7 @@ function Pets() {
         })
     }, [])
 
-    const petList = pets.map((pet) => <PetCard key={pet.id} pet={pet}/>)
+    const petList = pets.map((pet) => <PetCard key={pet.id} pet={pet} user={user}/>)
 
     return(
         <div className="pet-view">

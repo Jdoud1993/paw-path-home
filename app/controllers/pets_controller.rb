@@ -13,9 +13,33 @@ class PetsController < ApplicationController
         end 
     end
 
+    def create
+        pet = Pet.create(pet_params)
+        if pet
+            render json: pet, status: :created
+        else
+            render json: {errors: user.errors.full_messages}, status: :unprocessable_entity 
+        end
+    end
+
     def mypets
         mypets = Pet.where(user_id: session[:user_id])
         render json: mypets
     end
 
+    def destroy
+        pet = Pet.find_by(id: params[:id])
+        if pet && session[:user_id] === pet.user_id
+            pet.destroy
+            render json: {}
+        else
+            render json: {errors: "You may only delete a pet that you have posted."}, status: :unauthorized 
+        end
+    end
+
+    private
+    
+    def pet_params
+        params.permit(:name, :species, :breed, :sex, :lost_or_found, :phone_number, :image, :user_id)
+    end
 end
