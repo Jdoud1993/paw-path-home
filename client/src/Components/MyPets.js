@@ -79,8 +79,8 @@ function MyPets({user}) {
     const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet} user={user} onDeletePet={handleDeletePet}/>)
     
     return(
-        <div className="pet-view">
-            <h1>Post a Lost or Found Pet</h1>
+        <div>
+             <h1>Post a Lost or Found Pet</h1>
             <Form onSubmit={handleSubmit}>
                 <Row className="mb-3">
                     <Form.Group as={Col}>
@@ -134,10 +134,12 @@ function MyPets({user}) {
                     <h5 style={{color: "red"}}>{errors}</h5>
                 </Row>
             </Form>
-            <h1 className="pet-title">My Posted Pets</h1>
-            <p className="pet-title">If a pet has been reunited with its owner please delete your post.</p>
-            <div id="pet-disp">
-                {myPetList}
+            <div className="pet-view">
+                <h1 className="pet-title">My Posted Pets</h1>
+                <p className="pet-title">If a pet has been reunited with its owner please delete your post.</p>
+                <div id="pet-disp">
+                    {myPetList}
+                </div>
             </div>
         </div>
         )
