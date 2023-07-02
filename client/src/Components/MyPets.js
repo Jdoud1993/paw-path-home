@@ -40,6 +40,13 @@ function MyPets({user}) {
         });
     }
 
+    function handleUpdatePet(updatedPet) {
+        const index = myPets.indexOf(myPets.find((pet)=> pet.id === updatedPet.id))
+        const updatedPets = [...myPets]
+        updatedPets[index] = updatedPet
+        setMyPets(updatedPets)
+    }
+
     function handleDeletePet(deletedPet) {
         const newPets = myPets.filter((pet) => pet.id !== deletedPet.id)
         setMyPets(newPets)
@@ -76,7 +83,7 @@ function MyPets({user}) {
         })
     }
 
-    const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet} user={user} onDeletePet={handleDeletePet}/>)
+    const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet} user={user} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet}/>)
     
     return(
         <div>

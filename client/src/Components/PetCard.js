@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function PetCard({pet, onDeletePet, user}) {
+function PetCard({pet, onDeletePet, user, onUpdatePet}) {
 
   const [errors, setErrors] = useState([])
   const [isUpdate, setIsUpdate] = useState(false)
@@ -37,7 +37,24 @@ function PetCard({pet, onDeletePet, user}) {
 
   function handleSubmit(e) {
     e.preventDefault()
-  }
+    fetch(`/pets/${pet.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData)
+    })
+    .then((res) => {
+        if(res.ok) {
+            res.json().then((data) => {
+                onUpdatePet(data)
+                setIsUpdate(false)
+            })
+        } else {
+            res.json().then((err) => setErrors(err.errors))
+        }
+    })
+}
 
   function handleChange(e) {
     const name = e.target.name;
@@ -61,7 +78,7 @@ function PetCard({pet, onDeletePet, user}) {
                   <Card.Title>Sex: {pet.sex}</Card.Title>
                   <div className="button-group">
                     <Button as={Link} to={`/Pets/${pet.id}`} size="sm" style={{marginBottom: "5px"}}>See More Details</Button>
-                    <Button variant="primary" size="sm" onClick={() => setIsUpdate(true)} style={{marginBottom: "5px", marginTop:"5px"}}>Update Pet</Button>
+                    <Button variant="primary" size="sm" onClick={() => {setIsUpdate(true); setErrors([])}} style={{marginBottom: "5px", marginTop:"5px"}}>Update Pet</Button>
                     <Button variant="danger" size="sm" onClick={handleDelete} style={{marginBottom: "5px", marginTop:"5px"}}>Remove Pet</Button>
                     <h6 style={{ color: "red" }}>{errors}</h6>
                   </div>
@@ -126,7 +143,7 @@ function PetCard({pet, onDeletePet, user}) {
                   <h5 style={{ color: "red" }}>{errors}</h5>
                 </Row>
               </Form>
-              <Button variant="primary" type="submit" size="sm" onClick={() => setIsUpdate(false)}>
+              <Button variant="primary" type="submit" size="sm" onClick={() => {setIsUpdate(false); setErrors([])}}>
                     Close
               </Button>
             </Card.Body>

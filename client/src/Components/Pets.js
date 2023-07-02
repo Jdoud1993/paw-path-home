@@ -14,7 +14,19 @@ function Pets({user}) {
         })
     }, [])
 
-    const petList = pets.map((pet) => <PetCard key={pet.id} pet={pet} user={user}/>)
+    function handleUpdatePet(updatedPet) {
+        const index = pets.indexOf(pets.find((pet)=> pet.id === updatedPet.id))
+        const updatedPets = [...pets]
+        updatedPets[index] = updatedPet
+        setPets(updatedPets)
+    }
+
+    function handleDeletePet(deletedPet) {
+        const newPets = pets.filter((pet) => pet.id !== deletedPet.id)
+        setPets(newPets)
+    }
+
+    const petList = pets.map((pet) => <PetCard key={pet.id} pet={pet} user={user} onUpdatePet={handleUpdatePet} onDeletePet={handleDeletePet}/>)
 
     return(
         <div className="pet-view">

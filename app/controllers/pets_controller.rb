@@ -37,6 +37,16 @@ class PetsController < ApplicationController
         end
     end
 
+    def update
+        pet = Pet.find_by(id: params[:id])
+        if pet && session[:user_id] == pet.user_id
+            pet.update(pet_params)
+            render json: pet
+        else 
+            render json: {errors: "You may only update pets that you have posted."}, status: :unauthorized
+        end
+    end
+
     private
     
     def pet_params
