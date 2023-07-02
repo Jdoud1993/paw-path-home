@@ -13,4 +13,9 @@ class PetsController < ApplicationController
         end 
     end
 
+    def mypets
+        mypets = Pet.where(user_id: session[:user_id])
+        render json: mypets
+    end
+
 end

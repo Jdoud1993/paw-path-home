@@ -70,3 +70,14 @@ body {
     margin-bottom: 10px;
 }
 
+.comment-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    
+}
+

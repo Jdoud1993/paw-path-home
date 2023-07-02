@@ -21,12 +21,23 @@ function PetDetail({user}) {
     }, [id])
 
     function handleAddComment(newComment) {
-        console.log(newComment)
-        // setComments([...comments, newComment])
+        setComments([...comments, newComment])
+    }
+
+    function handleUpdateComment(updatedComment) {
+        const index = comments.indexOf(comments.find((comment)=> comment.id === updatedComment.id))
+        const updatedComments = [...comments]
+        updatedComments[index] = updatedComment
+        setComments(updatedComments)
+    }
+
+    function handleDeleteComment(deletedComment) {
+        const newComments = comments.filter((comment) => comment.id !== deletedComment.id)
+        setComments(newComments)
     }
 
     if (!pet) return <h2>Loading...</h2>
-    const commentList = comments.map((comment) => <Comments key={comment.id} comment={comment}/>)
+    const commentList = comments.map((comment) => <Comments key={comment.id} comment={comment} onUpdateComment={handleUpdateComment} onDeleteComment={handleDeleteComment} />)
     return (
         <>
             <Card border="primary">

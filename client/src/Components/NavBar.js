@@ -26,6 +26,9 @@ function NavBar({user, onLogin}) {
             <LinkContainer to="/Pets">
               <Nav.Link>Lost and Found Pets</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/MyPets">
+              <Nav.Link>My Pets</Nav.Link>
+            </LinkContainer>
           </Nav>
           <h4 className="username">{user.username}</h4>
           <Button variant="outline-light" onClick={handleLogoutClick}>Logout</Button>

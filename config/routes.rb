@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :pets, only: [:index, :show]
   resources :users
-  resource :comments, only: [:create]
+  resources :comments, only: [:create, :update, :destroy]
 
   post "/signup", to: "users#create"
 
@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   get "/authorize", to: "users#show"
+
+  get "/mypets", to: "pets#mypets"
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

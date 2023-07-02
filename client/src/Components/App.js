@@ -5,6 +5,7 @@ import Home from "./Home";
 import NavBar from "./NavBar"
 import Pets from "./Pets";
 import PetDetail from "./PetDetail";
+import MyPets from "./MyPets"
 
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
                     </Route>
                     <Route exact path="/Pets/:id">
                         <PetDetail user={user}/>
+                    </Route>
+                    <Route exacty path ="/MyPets">
+                        <MyPets user={user}/>
                     </Route>
                 </Switch>
             </div>

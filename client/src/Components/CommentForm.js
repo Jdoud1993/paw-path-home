@@ -22,7 +22,7 @@ function CommentForm({pet, user, onAddComment}) {
     }
 
     function handleSubmit(e) {
-        e.preventdefault();
+        e.preventDefault();
         fetch("/comments", {
             method: "POST",
             headers: {
@@ -31,7 +31,10 @@ function CommentForm({pet, user, onAddComment}) {
             body: JSON.stringify(formData)
         })
         .then((res) => res.json())
-        .then((newComment => onAddComment(newComment)))
+        .then((newComment => {
+            onAddComment(newComment)
+            setAddComment(false)
+        }))
     }
     
     if(addComment === true)
