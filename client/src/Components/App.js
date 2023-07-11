@@ -12,9 +12,9 @@ export const userContext = createContext(null)
 function App() {
 
     
-    
+    const [pets, setPets] = useState([])
     const [user, setUser] = useState(null)
-    
+  
 
     useEffect(()=>{
         fetch("/authorize")
@@ -25,10 +25,35 @@ function App() {
         })
     }, [])
 
+      
+    useEffect(() => {
+        fetch("/pets")
+        .then(res => res.json())
+        .then(data => {
+            setPets(data)
+        })
+    }, [])
+
+    function handleAddPet (newPet) {
+        setPets([...pets, newPet])
+    }
+
+    function handleUpdatePet(updatedPet) {
+        const index = pets.indexOf(pets.find((pet)=> pet.id === updatedPet.id))
+        const updatedPets = [...pets]
+        updatedPets[index] = updatedPet
+        setPets(updatedPets)
+    }
+
+    function handleDeletePet(deletedPet) {
+        const newPets = pets.filter((pet) => pet.id !== deletedPet.id)
+        setPets(newPets)
+    }
+
    
 
     if (!user) return <Login onLogin={setUser} />
-    
+   
     return(
         <userContext.Provider value={user}>
             <div id="body">
@@ -40,14 +65,14 @@ function App() {
                         <Route exact path="/">
                             <Home/>
                         </Route>
-                        <Route exact path ="/Pets">
-                            <Pets/>
+                        <Route exact path ="/Pets" >
+                            <Pets pets={pets} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet}/>
                         </Route>
                         <Route exact path="/Pets/:id">
                             <PetDetail/>
                         </Route>
                         <Route exacty path ="/MyPets">
-                            <MyPets />
+                            <MyPets pets={pets} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} onAddPet={handleAddPet} />
                         </Route>
                     </Switch>
                 </div>

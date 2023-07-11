@@ -1,5 +1,5 @@
 class PetsController < ApplicationController
-
+    skip_before_action :authorized, only: :index
     def index 
         render json: Pet.all
     end
@@ -20,11 +20,6 @@ class PetsController < ApplicationController
         else
             render json: {errors: user.errors.full_messages}, status: :unprocessable_entity 
         end
-    end
-
-    def mypets
-        mypets = Pet.where(user_id: session[:user_id])
-        render json: mypets
     end
 
     def destroy

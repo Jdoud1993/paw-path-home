@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useContext} from "react";
 import PetCard from "./PetCard"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,9 +7,8 @@ import Col from 'react-bootstrap/Col';
 import {userContext} from "./App"
 
 
-function MyPets() {
+function MyPets({pets, onDeletePet, onUpdatePet, onAddPet}) {
     const user = useContext(userContext)
-    const [myPets, setMyPets] = useState([])
     const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
         name:"",
@@ -23,14 +22,6 @@ function MyPets() {
 
     })
 
-    useEffect(() => {
-        fetch("/mypets")
-        .then(res => res.json())
-        .then(data => {
-            setMyPets(data)
-        })
-    }, [])
-
     function handleChange(e) {
         const name = e.target.name;
         const value = e.target.value;
@@ -39,18 +30,6 @@ function MyPets() {
             ...formData,
             [name]: value,
         });
-    }
-
-    function handleUpdatePet(updatedPet) {
-        const index = myPets.indexOf(myPets.find((pet)=> pet.id === updatedPet.id))
-        const updatedPets = [...myPets]
-        updatedPets[index] = updatedPet
-        setMyPets(updatedPets)
-    }
-
-    function handleDeletePet(deletedPet) {
-        const newPets = myPets.filter((pet) => pet.id !== deletedPet.id)
-        setMyPets(newPets)
     }
 
     function handleSubmit(e) {
@@ -65,7 +44,7 @@ function MyPets() {
         .then((res) => {
             if(res.ok) {
                 res.json().then((data) => {
-                    setMyPets([...myPets, data])
+                    onAddPet(data)
                     setFormData({
                         name:"",
                         species:"",
@@ -83,8 +62,9 @@ function MyPets() {
             }
         })
     }
-
-    const myPetList = myPets.map((pet) => <PetCard key={pet.id} pet={pet} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet}/>)
+    
+    const myPetList = pets.filter((pet) => pet.user_id === user.id).map((pet) => <PetCard key={pet.id} pet={pet} onDeletePet={onDeletePet} onUpdatePet={onUpdatePet}/>)
+    
     
     return(
         <div>
