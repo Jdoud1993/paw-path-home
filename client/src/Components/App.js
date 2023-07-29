@@ -36,7 +36,11 @@ function App() {
 
 
     function handleAddPet (newPet) {
-        setPets([...pets, newPet])
+        const userClone = {...user}
+        userClone.posted_pets.push(newPet)
+        setUser(userClone)
+        setPets([...pets, newPet]) 
+        
     }
 
     function handleUpdatePet(updatedPet) {
@@ -44,11 +48,16 @@ function App() {
         const updatedPets = [...pets]
         updatedPets[index] = updatedPet
         setPets(updatedPets)
+       
     }
 
     function handleDeletePet(deletedPet) {
         const newPets = pets.filter((pet) => pet.id !== deletedPet.id)
         setPets(newPets)
+        const userClone = {...user}
+        const newPostedPets = userClone.posted_pets.filter((pet) => pet.id !== deletedPet.id)
+        userClone.posted_pets = newPostedPets
+        setUser(userClone)
     }
 
    
