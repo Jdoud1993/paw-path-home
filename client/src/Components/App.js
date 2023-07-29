@@ -48,7 +48,34 @@ function App() {
         const updatedPets = [...pets]
         updatedPets[index] = updatedPet
         setPets(updatedPets)
-       
+        const userClone = {...user} 
+        if (user.pets.find((pet) => pet.id === updatedPet.id) && user.posted_pets.find((pet) => pet.id === updatedPet.id)) {
+            const commentClone = [...user.pets]
+            const commentIndex = userClone.pets.indexOf(userClone.pets.find((pet) => pet.id === updatedPet.id))
+            commentClone[commentIndex] = updatedPet
+            userClone.pets = commentClone
+            const postedClone = [...user.posted_pets]
+            const postedIndex = userClone.posted_pets.indexOf(userClone.posted_pets.find((pet) => pet.id === updatedPet.id))
+            postedClone[postedIndex] = updatedPet
+            userClone.posted_pets = postedClone
+            setUser(userClone)
+        }
+        else if (user.pets.find((pet) => pet.id === updatedPet.id)) {
+            const commentClone = [...user.pets]
+            const commentIndex = userClone.pets.indexOf(userClone.pets.find((pet) => pet.id === updatedPet.id))
+            commentClone[commentIndex] = updatedPet
+            userClone.pets = commentClone
+            setUser(userClone)
+        }
+        else    
+            {
+            const postedClone = [...user.posted_pets]
+            const postedIndex = userClone.posted_pets.indexOf(userClone.posted_pets.find((pet) => pet.id === updatedPet.id))
+            postedClone[postedIndex] = updatedPet
+            userClone.posted_pets = postedClone
+            setUser(userClone)
+        }
+        
     }
 
     function handleDeletePet(deletedPet) {
