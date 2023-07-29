@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import {userContext} from "./App"
 
 
-function MyPets({pets, onDeletePet, onUpdatePet, onAddPet}) {
+function MyPets({onDeletePet, onUpdatePet, onAddPet}) {
     const user = useContext(userContext)
     const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
@@ -63,7 +63,7 @@ function MyPets({pets, onDeletePet, onUpdatePet, onAddPet}) {
         })
     }
     
-    const myPetList = pets.filter((pet) => pet.user_id === user.id).map((pet) => <PetCard key={pet.id} pet={pet} onDeletePet={onDeletePet} onUpdatePet={onUpdatePet}/>)
+    const myPetList = user.posted_pets.map((pet) => <PetCard key={pet.id} pet={pet} onDeletePet={onDeletePet} onUpdatePet={onUpdatePet}/>)
     
     
     return(

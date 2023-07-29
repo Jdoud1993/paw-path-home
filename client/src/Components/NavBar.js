@@ -23,7 +23,7 @@ function NavBar({onLogin}) {
         <Navbar bg="primary" variant="dark" fixed="top">
         <Container>
           <LinkContainer to="/">
-          <Navbar.Brand href="/">Paw Path Home</Navbar.Brand>
+            <Navbar.Brand >Paw Path Home</Navbar.Brand>
           </LinkContainer>
           <Nav className="me-auto">
             <LinkContainer to="/Pets">
@@ -31,6 +31,9 @@ function NavBar({onLogin}) {
             </LinkContainer>
             <LinkContainer to="/MyPets">
               <Nav.Link>My Pets</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/CommentedPets">
+              <Nav.Link>My Commented Pets</Nav.Link>
             </LinkContainer>
           </Nav>
           <h4 className="username">{user.username}</h4>

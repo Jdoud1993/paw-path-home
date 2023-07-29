@@ -6,11 +6,11 @@ import NavBar from "./NavBar"
 import Pets from "./Pets";
 import PetDetail from "./PetDetail";
 import MyPets from "./MyPets"
+import CommentedPets from "./CommentedPets";
 
 export const userContext = createContext(null)
 
 function App() {
-
     
     const [pets, setPets] = useState([])
     const [user, setUser] = useState(null)
@@ -33,6 +33,9 @@ function App() {
             setPets(data)
         })
     }, [])
+
+    console.log(pets)
+    console.log(user)
 
     function handleAddPet (newPet) {
         setPets([...pets, newPet])
@@ -71,8 +74,11 @@ function App() {
                         <Route exact path="/Pets/:id">
                             <PetDetail/>
                         </Route>
-                        <Route exacty path ="/MyPets">
-                            <MyPets pets={pets} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} onAddPet={handleAddPet} />
+                        <Route exact path ="/MyPets">
+                            <MyPets onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} onAddPet={handleAddPet} />
+                        </Route>
+                        <Route exact path ="/CommentedPets">
+                            <CommentedPets onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} />
                         </Route>
                     </Switch>
                 </div>

@@ -6,7 +6,6 @@ class Pet < ApplicationRecord
     validates :sex, presence: true
     validates :lost_or_found, presence: true
     validates :phone_number, presence: true
-    validates :user_id, presence: true
     validates :image, presence: true
 
     belongs_to :user
