@@ -59,7 +59,7 @@ function Comments({comment, onUpdateComment, onDeleteComment}) {
     if(isUpdate===false){
     return(
         <ListGroup.Item className="comment" variant="primary">
-            <h4>{comment.user.username}:</h4>
+            <h4>{comment.username}:</h4>
             <h5 className="comment-group">
                 {comment.body}
                 <div className="button-group">
@@ -72,7 +72,7 @@ function Comments({comment, onUpdateComment, onDeleteComment}) {
     )} else if (isUpdate===true){
         return(
             <ListGroup.Item className="comment" variant="primary">
-                <h4>{comment.user.username}:</h4>
+                <h4>{comment.username}:</h4>
                 <Form style={{ marginTop: "10px" }} onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Control name="body" type="text" placeholder="Enter Comment" value={body.body} onChange={handleChange} />

@@ -1,12 +1,12 @@
 import React, {useEffect, useState, createContext} from "react";
 import {Route, Switch} from "react-router-dom";
-import Login from "./Login"
+import Login from "./Login";
 import Home from "./Home";
 import NavBar from "./NavBar"
 import Pets from "./Pets";
 import PetDetail from "./PetDetail";
-import MyPets from "./MyPets"
-import CommentedPets from "./CommentedPets";
+import MyPets from "./MyPets";
+import CommPets from "./CommPets";
 
 export const userContext = createContext(null)
 
@@ -34,8 +34,6 @@ function App() {
         })
     }, [])
 
-    console.log(pets)
-    console.log(user)
 
     function handleAddPet (newPet) {
         setPets([...pets, newPet])
@@ -77,8 +75,8 @@ function App() {
                         <Route exact path ="/MyPets">
                             <MyPets onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} onAddPet={handleAddPet} />
                         </Route>
-                        <Route exact path ="/CommentedPets">
-                            <CommentedPets onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} />
+                        <Route exact path ="/CommPets">
+                            <CommPets onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} onAddPet={handleAddPet} />
                         </Route>
                     </Switch>
                 </div>

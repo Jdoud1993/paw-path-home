@@ -18,8 +18,6 @@ function MyPets({onDeletePet, onUpdatePet, onAddPet}) {
         sex:"Unknown",
         lost_or_found:"Lost",
         image:"",
-        user_id:`${user.id}`
-
     })
 
     function handleChange(e) {
@@ -53,7 +51,6 @@ function MyPets({onDeletePet, onUpdatePet, onAddPet}) {
                         sex:"Unknown",
                         lost_or_found:"Lost",
                         image:"",
-                        user_id:`${user.id}`
                 
                     })
                 })

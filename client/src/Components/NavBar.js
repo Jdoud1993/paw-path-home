@@ -32,8 +32,8 @@ function NavBar({onLogin}) {
             <LinkContainer to="/MyPets">
               <Nav.Link>My Pets</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/CommentedPets">
-              <Nav.Link>My Commented Pets</Nav.Link>
+            <LinkContainer to="/CommPets">
+              <Nav.Link>Commented Pets</Nav.Link>
             </LinkContainer>
           </Nav>
           <h4 className="username">{user.username}</h4>
