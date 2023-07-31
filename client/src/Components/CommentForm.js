@@ -34,8 +34,8 @@ function CommentForm({pet, onAddComment}) {
             body: JSON.stringify(formData)
         })
         .then((res) => res.json())
-        .then((newComment => {
-            onAddComment(newComment)
+        .then((pet => {
+            onAddComment(pet)
             setAddComment(false)
         }))
     }

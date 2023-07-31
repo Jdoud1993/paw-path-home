@@ -1,9 +1,11 @@
 class CommentsController < ApplicationController
 
     def create
-        comment = Comment.create(comment_params)
+        current_user = User.find(session[:user_id])
+        comment = current_user.comments.create!(comment_params)
+        pet = Pet.find(comment.pet_id)
         if comment
-            render json: comment, status: :created
+            render json: pet, status: :created
         else
             render json: {errors: user.errors.full_messages}, status: :unprocessable_entity 
         end
@@ -32,6 +34,6 @@ class CommentsController < ApplicationController
     private
     
     def comment_params
-        params.permit(:body, :user_id, :pet_id)
+        params.permit(:body, :pet_id)
     end
 end

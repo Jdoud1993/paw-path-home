@@ -49,7 +49,7 @@ function App() {
         updatedPets[index] = updatedPet
         setPets(updatedPets)
         const userClone = {...user} 
-        if (user.pets.find((pet) => pet.id === updatedPet.id) && user.posted_pets.find((pet) => pet.id === updatedPet.id)) {
+        if (user.pets.find((pet) => pet.id === updatedPet.id)) {
             const commentClone = [...user.pets]
             const commentIndex = userClone.pets.indexOf(userClone.pets.find((pet) => pet.id === updatedPet.id))
             commentClone[commentIndex] = updatedPet
@@ -59,15 +59,7 @@ function App() {
             postedClone[postedIndex] = updatedPet
             userClone.posted_pets = postedClone
             setUser(userClone)
-        }
-        else if (user.pets.find((pet) => pet.id === updatedPet.id)) {
-            const commentClone = [...user.pets]
-            const commentIndex = userClone.pets.indexOf(userClone.pets.find((pet) => pet.id === updatedPet.id))
-            commentClone[commentIndex] = updatedPet
-            userClone.pets = commentClone
-            setUser(userClone)
-        }
-        else    
+        } else    
             {
             const postedClone = [...user.posted_pets]
             const postedIndex = userClone.posted_pets.indexOf(userClone.posted_pets.find((pet) => pet.id === updatedPet.id))
@@ -81,10 +73,18 @@ function App() {
     function handleDeletePet(deletedPet) {
         const newPets = pets.filter((pet) => pet.id !== deletedPet.id)
         setPets(newPets)
+        if(user.pets.find((pet) => pet.id === deletedPet.id)) {
+            const userClone = {...user}
+            const newPostedPets = userClone.posted_pets.filter((pet) => pet.id !== deletedPet.id)
+            userClone.posted_pets = newPostedPets
+            const newCommPets = userClone.pets.filter((pet) => pet.id !== deletedPet.id)
+            userClone.pets = newCommPets
+            setUser(userClone)
+        } else {
         const userClone = {...user}
         const newPostedPets = userClone.posted_pets.filter((pet) => pet.id !== deletedPet.id)
         userClone.posted_pets = newPostedPets
-        setUser(userClone)
+        setUser(userClone)}
     }
 
    
