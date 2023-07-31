@@ -35,8 +35,8 @@ function Comments({comment, onUpdateComment, onDeleteComment}) {
         })
         .then((res) => {
             if (res.ok) {
-                res.json().then((comment) => {
-                    onUpdateComment(comment)
+                res.json().then((pet) => {
+                    onUpdateComment(pet)
                     setIsUpdate(false)
                 })
             } else {

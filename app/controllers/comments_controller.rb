@@ -15,7 +15,8 @@ class CommentsController < ApplicationController
         comment = Comment.find_by(id: params[:id])
         if comment && session[:user_id] == comment.user_id
             comment.update(comment_params)
-            render json: comment 
+            pet = Pet.find(comment.pet_id)
+            render json: pet
         else 
             render json: {errors: "You may only update comments that you have posted."}, status: :unauthorized
         end

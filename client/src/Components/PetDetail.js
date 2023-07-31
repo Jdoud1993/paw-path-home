@@ -22,12 +22,15 @@ function PetDetail({onUpdatePetState}) {
        setPet(commPet)  
     }
 
-    function handleUpdateComment(updatedComment) {
-        
+    function handleUpdateComment(updatedCommPet) {
+        setPet(updatedCommPet)
     }
 
     function handleDeleteComment(deletedComment) {
-       
+       const petClone = {...pet}
+       const newComments = petClone.comments.filter((comment) => comment.id !== deletedComment.id)
+       petClone.comments = newComments
+       setPet(petClone)
     }
 
     if (!pet) return <h2>Loading...</h2>
