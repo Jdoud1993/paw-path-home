@@ -87,6 +87,24 @@ function App() {
         setUser(userClone)}
     }
 
+    function handleCommStateUpdate (commPet) {
+        const userComm = commPet.comments.filter((comm) => comm.username === user.username)
+        const userClone = {...user}
+        console.log(userComm.length)
+        
+        if(userComm.length === 1) {
+            userClone.pets.push(commPet)
+            setUser(userClone)
+        } else if(userComm.length > 1) {
+            return(null)
+        } else {
+            const newPets = userClone.pets.filter((pet) => pet.id !== commPet.id)
+            userClone.pets = newPets
+            setUser(userClone)
+        }
+
+    }
+
    
 
     if (!user) return <Login onLogin={setUser} />
@@ -106,7 +124,7 @@ function App() {
                             <Pets pets={pets} onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet}/>
                         </Route>
                         <Route exact path="/Pets/:id">
-                            <PetDetail/>
+                            <PetDetail onUpdateCommState={handleCommStateUpdate} />
                         </Route>
                         <Route exact path ="/MyPets">
                             <MyPets onDeletePet={handleDeletePet} onUpdatePet={handleUpdatePet} onAddPet={handleAddPet} />

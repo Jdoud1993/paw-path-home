@@ -5,7 +5,7 @@ import Comments from "./Comments";
 import ListGroup from 'react-bootstrap/ListGroup';
 import CommentForm from './CommentForm'
 
-function PetDetail({onUpdatePetState}) {
+function PetDetail({onUpdateCommState}) {
 
     const [pet, setPet] = useState(null);
     const {id} = useParams()
@@ -19,7 +19,8 @@ function PetDetail({onUpdatePetState}) {
     }, [id])
 
     function handleAddComment(commPet) {
-       setPet(commPet)  
+       setPet(commPet)
+       onUpdateCommState(commPet)  
     }
 
     function handleUpdateComment(updatedCommPet) {
@@ -31,6 +32,7 @@ function PetDetail({onUpdatePetState}) {
        const newComments = petClone.comments.filter((comment) => comment.id !== deletedComment.id)
        petClone.comments = newComments
        setPet(petClone)
+       onUpdateCommState(petClone)
     }
 
     if (!pet) return <h2>Loading...</h2>
